@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_identity"
+        android:icon="@mipmap/ic_identity_page_foreground"
+        android:title=""/>
+    <item
+        android:id="@+id/nav_relation"
+        android:icon="@mipmap/ic_relation_page_foreground"
+        android:title=""/>
+
+    <item
+        android:id="@+id/nav_job"
+        android:icon="@mipmap/ic_job_page_foreground"
+        android:title=""/>
+    <item
+        android:id="@+id/nav_cure"
+        android:icon="@mipmap/ic_cure_page_foreground"
+        android:title=""/>
+    <item
+        android:id="@+id/nav_bank"
+        android:icon="@mipmap/ic_bank_page_foreground"
+        android:title=""/>
+
+</menu>
