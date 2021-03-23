@@ -5,13 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-    <include layout="@layout/toolbar"/>
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
 
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="595dp"
-        android:layout_above="@id/bar" />
+        android:layout_height="500dp"
+        android:layout_above="@id/bar"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginTop="0dp" />
 
 
     <com.google.android.material.appbar.AppBarLayout
