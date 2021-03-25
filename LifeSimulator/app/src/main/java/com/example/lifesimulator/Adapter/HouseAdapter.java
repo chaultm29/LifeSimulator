@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.lifesimulator.Model.AppDataStore;
 import com.example.lifesimulator.Model.House;
 import com.example.lifesimulator.R;
 
@@ -63,6 +64,13 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ImageViewHod
         holder.item_image.setImageResource(resID);
         holder.item_name.setText(house.getName());
         holder.item_description.setText(house.getDescription()+"");
+        if (house.isOwner()){
+            holder.interact_button.setEnabled(false);
+            holder.interact_button.setText("Owned");
+            holder.interact_button.setBackgroundColor(Color.WHITE);
+        } else {
+            holder.interact_button.setText(house.getPrice()+"");
+        }
     }
 
     @Override
@@ -96,16 +104,20 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ImageViewHod
             interact_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(view.getContext(),
-                            item_name.getText() + " is price " + item_description.getText() , Toast.LENGTH_SHORT)
-                            .show();
-                    mHouse.get(getAdapterPosition()).setOwner(true);
-                    if (mHouse.get(getAdapterPosition()).isOwner()){
+                    House selectedHouse = mHouse.get(getAdapterPosition());
+                    if (AppDataStore.identity.buy(selectedHouse)){
+                        AppDataStore.UpdateBankView();
+                        selectedHouse.setOwner(true);
                         interact_button.setEnabled(false);
                         interact_button.setText("Owned");
                         interact_button.setBackgroundColor(Color.WHITE);
+                        Toast.makeText(view.getContext(),
+                                item_name.getText() +" is bought successfully!" , Toast.LENGTH_SHORT)
+                                .show();
                     } else {
-                        interact_button.setText(mHouse.get(getAdapterPosition()).getPrice()+"");
+                        Toast.makeText(view.getContext(),
+                                "Can't buy " + item_name.getText() , Toast.LENGTH_SHORT)
+                                .show();
                     }
                 }
             });
