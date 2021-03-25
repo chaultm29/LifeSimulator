@@ -9,6 +9,7 @@ public class Identity {
     private Condition condition;
     private Bank bank;
     private ArrayList<House> houses;
+    private ArrayList<Item> items;
 
     public Identity() {
     }
@@ -20,6 +21,15 @@ public class Identity {
         condition = new Condition(30, 3, 100, 80, 80);
         bank = new Bank();
         houses = new ArrayList<>();
+        items = new ArrayList<>();
+    }
+
+    public ArrayList<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(ArrayList<Item> items) {
+        this.items = items;
     }
 
     public ArrayList<House> getHouses() {

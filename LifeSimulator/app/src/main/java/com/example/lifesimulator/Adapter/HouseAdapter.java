@@ -63,7 +63,7 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ImageViewHod
         }
         holder.item_image.setImageResource(resID);
         holder.item_name.setText(house.getName());
-        holder.item_description.setText(house.getDescription()+"");
+        holder.item_description.setText(house.getDescription());
         if (house.isOwner()){
             holder.interact_button.setEnabled(false);
             holder.interact_button.setText("Owned");

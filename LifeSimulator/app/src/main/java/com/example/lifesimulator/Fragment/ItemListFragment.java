@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.example.lifesimulator.Adapter.HouseAdapter;
 import com.example.lifesimulator.Adapter.ItemAdapter;
+import com.example.lifesimulator.Model.AppDataStore;
 import com.example.lifesimulator.Model.House;
 import com.example.lifesimulator.Model.Item;
 import com.example.lifesimulator.R;
@@ -82,8 +83,9 @@ public class ItemListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.itemList);
         recyclerView.getLayoutParams().height = 1000;
-        items = new ArrayList<Item>();
-        for (int i = 1; i <= 50; i++) {
+        items = AppDataStore.identity.getItems();
+
+        for (int i = 1; i <= 6; i++) {
             items.add(new Item("I"+i, "Item "+ i, i*10, "New", false));
         }
 

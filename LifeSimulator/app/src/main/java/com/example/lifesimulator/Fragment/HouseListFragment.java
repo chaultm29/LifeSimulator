@@ -86,6 +86,7 @@ public class HouseListFragment extends Fragment {
         for (int i = 1; i <= 5; i++) {
             houses.add(new House("H"+i, "House "+ i, i*10, "New", false, i*9));
         }
+        houses.get(0).setOwner(true);
 
         adapter = new HouseAdapter(houses, view.getContext());
 
