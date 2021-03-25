@@ -75,23 +75,13 @@ public class HouseListFragment extends Fragment {
 
     RecyclerView recyclerView;
     HouseAdapter adapter;
-    ArrayList<House> houses;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.houseList);
         recyclerView.getLayoutParams().height = 1000;
-        houses = AppDataStore.identity.getHouses();
-
-        for (int i = 1; i <= 5; i++) {
-            houses.add(new House("H"+i, "House "+ i, i*10, "New", false, i*9));
-        }
-        houses.get(0).setOwner(true);
-
-        adapter = new HouseAdapter(houses, view.getContext());
-
+        adapter = new HouseAdapter(AppDataStore.identity.getHouses(), view.getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
-
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(linearLayoutManager);
     }

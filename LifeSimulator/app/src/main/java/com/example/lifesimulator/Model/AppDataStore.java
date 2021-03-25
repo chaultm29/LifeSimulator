@@ -3,6 +3,8 @@ package com.example.lifesimulator.Model;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class AppDataStore {
     public static Identity identity;
 
@@ -23,5 +25,18 @@ public class AppDataStore {
         Bank bank = identity.getBank();
         txtCash.setText("$ " + bank.getCashString());
         txtSaving.setText("$ " + bank.getSavingMoneyString());
+    }
+
+    public static void InitData(){
+        ArrayList<House> houses = AppDataStore.identity.getHouses();
+        for (int i = 1; i <= 5; i++) {
+            houses.add(new House("H"+i, "House "+ i, i*10, "New", false, i*9));
+        }
+        houses.get(0).setOwner(true);
+
+        ArrayList<Item> items = AppDataStore.identity.getItems();
+        for (int i = 1; i <= 6; i++) {
+            items.add(new Item("I"+i, "Item "+ i, i*10, "New", false));
+        }
     }
 }
