@@ -81,8 +81,9 @@ public class HouseListFragment extends Fragment {
         recyclerView = view.findViewById(R.id.houseList);
         recyclerView.getLayoutParams().height = 1000;
         houses = new ArrayList<House>();
-        for (int i = 1; i <= 50; i++) {
-            houses.add(new House("H"+i, "House "+ i, i*10, "New", i*9));
+        houses.add(new House("H"+1, "House 1", 10, "New", true, 9));
+        for (int i = 2; i <= 50; i++) {
+            houses.add(new House("H"+i, "House "+ i, i*10, "New", false, i*9));
         }
 
         adapter = new HouseAdapter(houses, view.getContext());

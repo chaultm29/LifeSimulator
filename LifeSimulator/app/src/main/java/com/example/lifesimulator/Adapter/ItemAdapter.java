@@ -11,7 +11,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.lifesimulator.Model.House;
 import com.example.lifesimulator.Model.Item;
 import com.example.lifesimulator.R;
 
@@ -43,7 +42,7 @@ public class ItemAdapter extends  RecyclerView.Adapter<ItemAdapter.ImageViewHode
         Item item = mItem.get(position);
 
         holder.item_name.setText(item.getName());
-        holder.item_price.setText(item.getPrice()+"");
+        holder.item_description.setText(item.getPrice()+"");
     }
 
     @Override
@@ -53,20 +52,20 @@ public class ItemAdapter extends  RecyclerView.Adapter<ItemAdapter.ImageViewHode
 
     public class ImageViewHoder extends RecyclerView.ViewHolder{
         public TextView item_name;
-        public TextView item_price;
+        public TextView item_description;
         public Button interact_button;
 
         public ImageViewHoder(View itemView) {
             super(itemView);
             item_name = itemView.findViewById(R.id.item_name);
-            item_price = itemView.findViewById(R.id.item_price);
+            item_description = itemView.findViewById(R.id.item_description);
             interact_button = itemView.findViewById(R.id.interact_button);
 
             interact_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Toast.makeText(view.getContext(),
-                            item_name.getText() + " is price " + item_price.getText() , Toast.LENGTH_SHORT)
+                            item_name.getText() + " is price " + item_description.getText() , Toast.LENGTH_SHORT)
                             .show();
                 }
             });

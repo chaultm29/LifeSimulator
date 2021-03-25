@@ -5,15 +5,25 @@ public abstract class NetWorth {
     protected String name ;
     protected float price ;
     protected String description;
+    protected boolean isOwner;
 
     public NetWorth() {
     }
 
-    public NetWorth(String code, String name, float price, String description) {
+    public NetWorth(String code, String name, float price, String description, boolean isOwner) {
         this.code = code;
         this.name = name;
         this.price = price;
         this.description = description;
+        this.isOwner = isOwner;
+    }
+
+    public boolean isOwner() {
+        return isOwner;
+    }
+
+    public void setOwner(boolean owner) {
+        isOwner = owner;
     }
 
     public String getCode() {

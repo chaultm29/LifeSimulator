@@ -1,10 +1,12 @@
 package com.example.lifesimulator.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,9 +42,27 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ImageViewHod
     @Override
     public void onBindViewHolder(@NonNull ImageViewHoder holder, int position) {
         House house = mHouse.get(position);
-
+        int resID = 0;
+        switch (house.getCode()){
+            case "H2":
+                resID = R.drawable.h_shareroom;
+                break;
+            case "H3":
+                resID = R.drawable.h_apartment1;
+                break;
+            case "H4":
+                resID = R.drawable.h_apartment2;
+                break;
+            case "H5":
+                resID = R.drawable.h_house;
+                break;
+            default:
+                resID = R.drawable.h_bench;
+                break;
+        }
+        holder.item_image.setImageResource(resID);
         holder.item_name.setText(house.getName());
-        holder.item_price.setText(house.getPrice()+"");
+        holder.item_description.setText(house.getDescription()+"");
     }
 
     @Override
@@ -50,23 +70,43 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ImageViewHod
         return mHouse.size();
     }
 
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
     public class ImageViewHoder extends RecyclerView.ViewHolder{
+        public ImageView item_image;
         public TextView item_name;
-        public TextView item_price;
+        public TextView item_description;
         public Button interact_button;
 
         public ImageViewHoder(View itemView) {
             super(itemView);
+            item_image = itemView.findViewById(R.id.item_image);
             item_name = itemView.findViewById(R.id.item_name);
-            item_price = itemView.findViewById(R.id.item_price);
+            item_description = itemView.findViewById(R.id.item_description);
             interact_button = itemView.findViewById(R.id.interact_button);
 
             interact_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Toast.makeText(view.getContext(),
-                            item_name.getText() + " is price " + item_price.getText() , Toast.LENGTH_SHORT)
+                            item_name.getText() + " is price " + item_description.getText() , Toast.LENGTH_SHORT)
                             .show();
+                    mHouse.get(getAdapterPosition()).setOwner(true);
+                    if (mHouse.get(getAdapterPosition()).isOwner()){
+                        interact_button.setEnabled(false);
+                        interact_button.setText("Owned");
+                        interact_button.setBackgroundColor(Color.WHITE);
+                    } else {
+                        interact_button.setText(mHouse.get(getAdapterPosition()).getPrice()+"");
+                    }
                 }
             });
         }

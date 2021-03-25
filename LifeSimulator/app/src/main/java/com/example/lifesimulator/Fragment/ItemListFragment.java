@@ -84,7 +84,7 @@ public class ItemListFragment extends Fragment {
         recyclerView.getLayoutParams().height = 1000;
         items = new ArrayList<Item>();
         for (int i = 1; i <= 50; i++) {
-            items.add(new Item("I"+i, "Item "+ i, i*10, "New"));
+            items.add(new Item("I"+i, "Item "+ i, i*10, "New", false));
         }
 
         adapter = new ItemAdapter(items, view.getContext());
