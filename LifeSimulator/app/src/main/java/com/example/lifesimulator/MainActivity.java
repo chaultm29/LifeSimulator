@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         AppDataStore.identity = new Identity("Min", false);
 
+        AppDataStore.InitData();
         AppDataStore.UpdateConditionView();
         AppDataStore.UpdateBankView();
 

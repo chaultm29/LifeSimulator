@@ -77,22 +77,13 @@ public class ItemListFragment extends Fragment {
 
     RecyclerView recyclerView;
     ItemAdapter adapter;
-    ArrayList<Item> items;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.itemList);
         recyclerView.getLayoutParams().height = 1000;
-        items = AppDataStore.identity.getItems();
-
-        for (int i = 1; i <= 6; i++) {
-            items.add(new Item("I"+i, "Item "+ i, i*10, "New", false));
-        }
-
-        adapter = new ItemAdapter(items, view.getContext());
-
+        adapter = new ItemAdapter(AppDataStore.identity.getItems(), view.getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
-
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(linearLayoutManager);
     }
