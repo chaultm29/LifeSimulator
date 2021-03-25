@@ -6,8 +6,8 @@ public class House extends NetWorth {
     public House() {
     }
 
-    public House(String code, String name, float price, String desc, float rent) {
-        super(code, name, price, desc);
+    public House(String code, String name, float price, String description, boolean isOwner, float rent) {
+        super(code, name, price, description, isOwner);
         this.rent = rent;
     }
 
