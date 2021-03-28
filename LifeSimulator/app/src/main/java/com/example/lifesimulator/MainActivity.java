@@ -22,9 +22,6 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     Fragment selectedFragment = null;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,9 +32,8 @@ public class MainActivity extends AppCompatActivity {
         AppDataStore.txtCash = findViewById(R.id.txtCash);
         AppDataStore.txtSaving = findViewById(R.id.txtSaving);
 
-        AppDataStore.identity = new Identity("Min", false);
-
-        AppDataStore.InitData();
+        //AppDataStore.ClearData(this);
+        AppDataStore.LoadData(this);
         AppDataStore.UpdateConditionView();
         AppDataStore.UpdateBankView();
 
@@ -72,6 +68,11 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         }
-
     };
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        AppDataStore.SaveData(this);
+    }
 }
