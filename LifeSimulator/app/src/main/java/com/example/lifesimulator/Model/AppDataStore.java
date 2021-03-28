@@ -1,8 +1,20 @@
 package com.example.lifesimulator.Model;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class AppDataStore {
@@ -25,6 +37,34 @@ public class AppDataStore {
         Bank bank = identity.getBank();
         txtCash.setText("$ " + bank.getCashString());
         txtSaving.setText("$ " + bank.getSavingMoneyString());
+    }
+
+    public static void LoadData(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("lifesimulator", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("identity", null);
+        Type type = new TypeToken<Identity>(){}.getType();
+        identity = gson.fromJson(json, type);
+        if (identity == null){
+            identity = new Identity();
+            InitData();
+        }
+    }
+
+    public static void SaveData(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("lifesimulator", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(identity);
+        editor.putString("identity", json);
+        editor.apply();
+    }
+
+    public static void ClearData(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("lifesimulator", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("identity", null);
+        editor.apply();
     }
 
     public static void InitData(){

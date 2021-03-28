@@ -12,12 +12,9 @@ public class Identity {
     private ArrayList<Item> items;
 
     public Identity() {
-    }
-
-    public Identity(String name, boolean gender) {
-        this.name = name;
+        this.name = "Min";
         this.age = 1;
-        this.gender = gender;
+        this.gender = false;
         condition = new Condition(30, 3, 100, 80, 80);
         bank = new Bank();
         houses = new ArrayList<>();
