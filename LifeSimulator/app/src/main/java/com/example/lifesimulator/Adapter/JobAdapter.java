@@ -58,8 +58,8 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
             super(itemView);
 
             imgJob = itemView.findViewById(R.id.img_job);
-            title = itemView.findViewById(R.id.tv_title);
-            interactButton = itemView.findViewById(R.id.interact_button);
+            title = itemView.findViewById(R.id.job_title);
+            interactButton = itemView.findViewById(R.id.interact_button_job);
         }
     }
 }

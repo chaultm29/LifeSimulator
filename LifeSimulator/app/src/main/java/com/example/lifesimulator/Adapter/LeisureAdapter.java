@@ -6,10 +6,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.lifesimulator.Model.AppDataStore;
+import com.example.lifesimulator.Model.Cure;
 import com.example.lifesimulator.Model.Leisure;
 import com.example.lifesimulator.R;
 
@@ -58,8 +61,27 @@ public class LeisureAdapter extends RecyclerView.Adapter<LeisureAdapter.LeisureV
             super(itemView);
 
             imgLeisure = itemView.findViewById(R.id.img_leisure);
-            title = itemView.findViewById(R.id.tv_title);
-            interactButton = itemView.findViewById(R.id.interact_button);
+            title = itemView.findViewById(R.id.leisure_title);
+            interactButton = itemView.findViewById(R.id.interact_button_leisure);
+
+            interactButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Leisure selectedLeisure = mListLeisure.get(getAdapterPosition());
+
+                    if (AppDataStore.identity.doLeisure(selectedLeisure)){
+                        AppDataStore.UpdateBankView();
+                        AppDataStore.UpdateConditionView();
+                        Toast.makeText(view.getContext(),
+                                title.getText() +" is bought successfully!" , Toast.LENGTH_SHORT)
+                                .show();
+                    } else {
+                        Toast.makeText(view.getContext(),
+                                "Can't buy " + title.getText() , Toast.LENGTH_SHORT)
+                                .show();
+                    }
+                }
+            });
         }
     }
 }

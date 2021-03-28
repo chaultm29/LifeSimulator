@@ -19,6 +19,14 @@ public class Condition {
         this.intelligence = intelligence;
     }
 
+    public void effect(Condition other) {
+        this.height += other.getHeight();
+        this.weight += other.getWeight();
+        this.health += other.getHealth();
+        this.happiness += other.getHappiness();
+        this.intelligence += other.getIntelligence();
+    }
+
     public float getHeight() {
         return height;
     }

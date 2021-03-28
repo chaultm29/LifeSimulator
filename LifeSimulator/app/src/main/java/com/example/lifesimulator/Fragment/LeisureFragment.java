@@ -44,27 +44,27 @@ public class LeisureFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rcvLeisure = view.findViewById(R.id.rcv_leisure);
-
-        leisureAdapter = new LeisureAdapter();
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
-        rcvLeisure.setLayoutManager(linearLayoutManager);
-        rcvLeisure.setFocusable(false);
-        rcvLeisure.setNestedScrollingEnabled(false);
-
-        leisureAdapter.setData(getListLeisure());
-        rcvLeisure.setAdapter(leisureAdapter);
+//        rcvLeisure = view.findViewById(R.id.rcv_leisure);
+//
+//        leisureAdapter = new LeisureAdapter();
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
+//        rcvLeisure.setLayoutManager(linearLayoutManager);
+//        rcvLeisure.setFocusable(false);
+//        rcvLeisure.setNestedScrollingEnabled(false);
+//
+//        leisureAdapter.setData(getListLeisure());
+//        rcvLeisure.setAdapter(leisureAdapter);
 
     }
 
-    private List<Leisure> getListLeisure() {
-        List<Leisure> list = new ArrayList<>();
-        list.add(new Leisure("Nghỉ ngơi", 0, "Take a rest", R.drawable.leisure_bed));
-        list.add(new Leisure("Đi chơi công viên", 20, "Take a rest", R.drawable.leisure_park_bench));
-        list.add(new Leisure("Đi nhậu", 0, "Take a rest", R.drawable.leisure_beer));
-        list.add(new Leisure("Đu concert của ộp pa", 0, "Take a rest", R.drawable.leisure_concert));
-        list.add(new Leisure("Đi biển", 0, "Take a rest", R.drawable.leisure_sunbathe));
-        return list;
-    }
+//    private List<Leisure> getListLeisure() {
+//        List<Leisure> list = new ArrayList<>();
+//        list.add(new Leisure("Nghỉ ngơi", 0, "Take a rest", R.drawable.leisure_bed));
+//        list.add(new Leisure("Đi chơi công viên", 20, "Take a rest", R.drawable.leisure_park_bench));
+//        list.add(new Leisure("Đi nhậu", 0, "Take a rest", R.drawable.leisure_beer));
+//        list.add(new Leisure("Đu concert của ộp pa", 0, "Take a rest", R.drawable.leisure_concert));
+//        list.add(new Leisure("Đi biển", 0, "Take a rest", R.drawable.leisure_sunbathe));
+//        return list;
+//    }
 
 }
