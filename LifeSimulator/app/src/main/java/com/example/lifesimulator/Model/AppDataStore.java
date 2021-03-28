@@ -54,8 +54,9 @@ public class AppDataStore {
         identity = gson.fromJson(json, type);
         if (identity == null){
             identity = new Identity();
-            InitData();
+            initData();
         }
+        initDefaultData();
     }
 
     public static void SaveData(Context context) {
@@ -74,7 +75,7 @@ public class AppDataStore {
         editor.apply();
     }
 
-    public static void InitData(){
+    private static void initData(){
         ArrayList<House> houses = AppDataStore.identity.getHouses();
         for (int i = 1; i <= 5; i++) {
             houses.add(new House("H"+i, "House "+ i, i*10, "New", false, i*9));
@@ -85,6 +86,9 @@ public class AppDataStore {
         for (int i = 1; i <= 6; i++) {
             items.add(new Item("I"+i, "Item "+ i, i*10, "New", false));
         }
+    }
+
+    private static void initDefaultData(){
         leisures = getListLeisure();
         cures = getListCure();
     }
