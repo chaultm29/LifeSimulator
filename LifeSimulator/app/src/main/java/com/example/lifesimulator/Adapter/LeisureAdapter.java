@@ -6,10 +6,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.lifesimulator.Model.AppDataStore;
+import com.example.lifesimulator.Model.Cure;
 import com.example.lifesimulator.Model.Leisure;
 import com.example.lifesimulator.R;
 
@@ -37,6 +40,7 @@ public class LeisureAdapter extends RecyclerView.Adapter<LeisureAdapter.LeisureV
         holder.imgLeisure.setImageResource(leisure.getResourceID());
         holder.title.setText(leisure.getName());
         holder.interactButton.setText(String.valueOf(leisure.getFee()));
+        holder.description.setText(leisure.getDescription());
     }
 
     @Override
@@ -52,14 +56,35 @@ public class LeisureAdapter extends RecyclerView.Adapter<LeisureAdapter.LeisureV
         private ImageView imgLeisure;
         private TextView title;
         private Button interactButton;
+        private TextView description;
 
 
         public LeisureViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imgLeisure = itemView.findViewById(R.id.img_leisure);
-            title = itemView.findViewById(R.id.tv_title);
-            interactButton = itemView.findViewById(R.id.interact_button);
+            title = itemView.findViewById(R.id.leisure_title);
+            interactButton = itemView.findViewById(R.id.interact_button_leisure);
+            description = itemView.findViewById(R.id.leisure_description);
+
+            interactButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Leisure selectedLeisure = mListLeisure.get(getAdapterPosition());
+
+                    if (AppDataStore.identity.doLeisure(selectedLeisure)){
+                        AppDataStore.UpdateBankView();
+                        AppDataStore.UpdateConditionView();
+                        Toast.makeText(view.getContext(),
+                                title.getText() +" is bought successfully!" , Toast.LENGTH_SHORT)
+                                .show();
+                    } else {
+                        Toast.makeText(view.getContext(),
+                                "Can't buy " + title.getText() , Toast.LENGTH_SHORT)
+                                .show();
+                    }
+                }
+            });
         }
     }
 }

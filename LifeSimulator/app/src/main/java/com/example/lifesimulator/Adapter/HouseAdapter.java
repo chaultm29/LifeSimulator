@@ -21,11 +21,9 @@ import java.util.List;
 
 public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ImageViewHoder> {
     private List<House> mHouse;
-    private Context mContext;
 
     public HouseAdapter(List mHouse, Context mContext) {
         this.mHouse = mHouse;
-        this.mContext = mContext;
     }
 
     @NonNull

@@ -5,13 +5,15 @@ public class Cure {
     private String name;
     private float fee;
     private String description;
+    private Condition effect;
 
-    public Cure(String name, float fee, String description,int resourceID) {
+    public Cure(String name, float fee, String description,int resourceID, Condition effect) {
 
         this.name = name;
         this.fee = fee;
         this.description = description;
         this.resourceID = resourceID;
+        this.effect = effect;
     }
 
     public int getResourceID() {
@@ -44,5 +46,13 @@ public class Cure {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Condition getEffect() {
+        return effect;
+    }
+
+    public void setEffect(Condition effect) {
+        this.effect = effect;
     }
 }

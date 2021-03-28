@@ -14,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lifesimulator.Model.AppDataStore;
-import com.example.lifesimulator.Model.House;
 import com.example.lifesimulator.Model.Item;
 import com.example.lifesimulator.R;
 
