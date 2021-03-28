@@ -50,6 +50,7 @@ public class CureAdapter extends RecyclerView.Adapter<CureAdapter.CureViewHolder
         holder.imgCure.setImageResource(cure.getResourceID());
         holder.title.setText(cure.getName());
         holder.interactButton.setText(String.valueOf(cure.getFee()));
+        holder.description.setText(cure.getDescription());
     }
 
     @Override
@@ -65,6 +66,7 @@ public class CureAdapter extends RecyclerView.Adapter<CureAdapter.CureViewHolder
         private ImageView imgCure;
         private TextView title;
         private Button interactButton;
+        private TextView description;
 
         public CureViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -72,6 +74,7 @@ public class CureAdapter extends RecyclerView.Adapter<CureAdapter.CureViewHolder
             imgCure = itemView.findViewById(R.id.img_cure);
             title = itemView.findViewById(R.id.cure_title);
             interactButton = itemView.findViewById(R.id.interact_button_cure);
+            description = itemView.findViewById(R.id.cure_description);
 
             interactButton.setOnClickListener(new View.OnClickListener() {
                 @Override
