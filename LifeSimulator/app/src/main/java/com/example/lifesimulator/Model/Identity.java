@@ -83,4 +83,20 @@ public class Identity {
     public void setGender(boolean gender) {
         this.gender = gender;
     }
+
+    public boolean doLeisure(Leisure leisure){
+        if(bank.decrease(leisure.getFee())){
+            condition.effect(leisure.getEffect());
+            return true;
+        }
+        return false;
+    }
+
+    public  boolean useCure(Cure cure) {
+        if(bank.decrease(cure.getFee())){
+            condition.effect(cure.getEffect());
+            return true;
+        }
+        return false;
+    }
 }

@@ -6,6 +6,7 @@ public class Leisure {
     private float fee;
     private String description;
     private int resourceID;
+    private  Condition effect;
 
     public Leisure(){
 
@@ -19,11 +20,12 @@ public class Leisure {
         this.resourceID = resourceID;
     }
 
-    public Leisure(String name, float fee, String description, int resourceID) {
+    public Leisure(String name, float fee, String description, int resourceID, Condition effect) {
         this.name = name;
         this.fee = fee;
         this.description = description;
         this.resourceID = resourceID;
+        this.effect = effect;
     }
 
     public String getName() {
@@ -64,5 +66,13 @@ public class Leisure {
 
     public void setResourceID(int resourceID) {
         this.resourceID = resourceID;
+    }
+
+    public Condition getEffect() {
+        return effect;
+    }
+
+    public void setEffect(Condition effect) {
+        this.effect = effect;
     }
 }
