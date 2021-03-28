@@ -36,8 +36,7 @@
             android:layout_height="wrap_content"
             android:textStyle="italic"
             android:textSize="14sp"
-            android:text="@string/app_name"
-
+            android:id="@+id/cure_description"
             />
     </LinearLayout>
 

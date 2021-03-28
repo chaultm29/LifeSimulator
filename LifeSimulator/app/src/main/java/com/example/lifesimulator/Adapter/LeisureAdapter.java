@@ -40,6 +40,7 @@ public class LeisureAdapter extends RecyclerView.Adapter<LeisureAdapter.LeisureV
         holder.imgLeisure.setImageResource(leisure.getResourceID());
         holder.title.setText(leisure.getName());
         holder.interactButton.setText(String.valueOf(leisure.getFee()));
+        holder.description.setText(leisure.getDescription());
     }
 
     @Override
@@ -55,6 +56,7 @@ public class LeisureAdapter extends RecyclerView.Adapter<LeisureAdapter.LeisureV
         private ImageView imgLeisure;
         private TextView title;
         private Button interactButton;
+        private TextView description;
 
 
         public LeisureViewHolder(@NonNull View itemView) {
@@ -63,6 +65,7 @@ public class LeisureAdapter extends RecyclerView.Adapter<LeisureAdapter.LeisureV
             imgLeisure = itemView.findViewById(R.id.img_leisure);
             title = itemView.findViewById(R.id.leisure_title);
             interactButton = itemView.findViewById(R.id.interact_button_leisure);
+            description = itemView.findViewById(R.id.leisure_description);
 
             interactButton.setOnClickListener(new View.OnClickListener() {
                 @Override

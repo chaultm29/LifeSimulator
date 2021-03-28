@@ -52,24 +52,24 @@ public class AppDataStore {
 
     private static ArrayList<Leisure> getListLeisure() {
         ArrayList<Leisure> list = new ArrayList<>();
-        list.add(new Leisure("Nghỉ ngơi", 0, "Take a rest", R.drawable.leisure_bed, new Condition(0,0,0,1, 1)));
-        list.add(new Leisure("Đi chơi công viên", 20, "Take a rest", R.drawable.leisure_park_bench, new Condition(0, 0, -2, 2, 1)));
-        list.add(new Leisure("Đi nhậu", 200, "Take a rest", R.drawable.leisure_beer, new Condition(0, 0, -1, 5, -2)));
-        list.add(new Leisure("Đu concert của ộp pa", 1000, "Take a rest", R.drawable.leisure_concert, new Condition(0, 0, -2, 6, -1)));
-        list.add(new Leisure("Đi biển", 2000, "Take a rest", R.drawable.leisure_sunbathe, new Condition(0, 0, 1, 8, 1)));
+        list.add(new Leisure("Nghỉ ngơi", 0, "+1 vui +1 iq", R.drawable.leisure_bed, new Condition(0,0,0,1, 1)));
+        list.add(new Leisure("Đi chơi công viên", 20, "-2 khỏe +2 vui +1 iq", R.drawable.leisure_park_bench, new Condition(0, 0, -2, 2, 1)));
+        list.add(new Leisure("Đi nhậu", 200, "-1 khỏe +5 vui -2 iq", R.drawable.leisure_beer, new Condition(0, 0, -1, 5, -2)));
+        list.add(new Leisure("Đu concert của ộp pa", 1000, "-2 khỏe +6 vui -1 iq", R.drawable.leisure_concert, new Condition(0, 0, -2, 6, -1)));
+        list.add(new Leisure("Đi biển", 2000, "+1 khỏe +8 vui +1 iq", R.drawable.leisure_sunbathe, new Condition(0, 0, 1, 8, 1)));
         return list;
     }
 
     private static ArrayList<Cure> getListCure() {
         ArrayList<Cure> list = new ArrayList<>();
 
-        list.add(new Cure("Ngủ", 0, "Take a rest", R.drawable.leisure_bed, new Condition(0,0,1,-1,1)));
-        list.add(new Cure("Ăn cháo", 20, "Take a rest", R.drawable.cure_hand_pill, new Condition(0, 0 , 1, 1, 0)));
-        list.add(new Cure("Uống thuốc", 50, "Take a rest", R.drawable.cure_pill, new Condition(0, 0 , 3, -1, -1)));
-        list.add(new Cure("Tự chữa", 50, "Take a rest", R.drawable.bandage, new Condition(0, 0, 5, -2,  -1)));
-        list.add(new Cure("Đi khám bác sĩ", 1000, "Take a rest", R.drawable.cure_doctor_female, new Condition(0, 0, 10, 0, 0)));
-        list.add(new Cure("Ở bệnh xá", 2000, "Take a rest", R.drawable.cure_hospital_bed, new Condition(0, 0, 20, 0, 0)));
-        list.add(new Cure("Đi hóa trị", 2000, "Take a rest", R.drawable.cure_treatment_plan, new Condition(0, 0, 50, 0, 0)));
+        list.add(new Cure("Ngủ", 0, "+1 khỏe", R.drawable.leisure_bed, new Condition(0,0,1,0,0)));
+        list.add(new Cure("Ăn cháo bác đầu ngõ nấu", 20, "+3 khỏe", R.drawable.cure_hand_pill, new Condition(0, 0 , 3, 0, 0)));
+        list.add(new Cure("Uống thuốc", 50, "+3 khỏe -1 vui", R.drawable.cure_pill, new Condition(0, 0 , 3, -1, 0)));
+        list.add(new Cure("Tự chữa", 50, "+5 khỏe", R.drawable.bandage, new Condition(0, 0, 5, 0,  0)));
+        list.add(new Cure("Đi khám bác sĩ", 1000, "+10 khỏe", R.drawable.cure_doctor_female, new Condition(0, 0, 10, 0, 0)));
+        list.add(new Cure("Ở bệnh xá", 2000, "+20 khỏe", R.drawable.cure_hospital_bed, new Condition(0, 0, 20, 0, 0)));
+        list.add(new Cure("Đi hóa trị", 20000, "+50 khỏe", R.drawable.cure_treatment_plan, new Condition(0, 0, 50, 0, 0)));
         return list;
     }
 
