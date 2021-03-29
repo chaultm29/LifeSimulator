@@ -10,9 +10,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.lifesimulator.Model.AppDialog;
 import com.example.lifesimulator.Model.Job;
+import com.example.lifesimulator.Model.Question;
 import com.example.lifesimulator.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
@@ -60,6 +63,15 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
             imgJob = itemView.findViewById(R.id.img_job);
             title = itemView.findViewById(R.id.job_title);
             interactButton = itemView.findViewById(R.id.interact_button_job);
+
+            interactButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AppDialog.InfoDialog("hi", null, view.getContext());
+                    //Question q = new Question("hiii", new String[]{"um", "uk", "uh", "ò"}, 3);
+                    //AppDialog.QuestionDialog(q, view.getContext());
+                }
+            });
         }
     }
 }
