@@ -72,15 +72,10 @@ public class LeisureAdapter extends RecyclerView.Adapter<LeisureAdapter.LeisureV
                 public void onClick(View view) {
                     Leisure selectedLeisure = mListLeisure.get(getAdapterPosition());
 
-                    if (AppDataStore.identity.doLeisure(selectedLeisure)){
-                        AppDataStore.UpdateBankView();
+                    if (AppDataStore.identity.doLeisure(view.getContext(), selectedLeisure)){
                         AppDataStore.UpdateConditionView();
                         Toast.makeText(view.getContext(),
                                 title.getText() +" is bought successfully!" , Toast.LENGTH_SHORT)
-                                .show();
-                    } else {
-                        Toast.makeText(view.getContext(),
-                                "Can't buy " + title.getText() , Toast.LENGTH_SHORT)
                                 .show();
                     }
                 }

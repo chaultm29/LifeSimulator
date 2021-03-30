@@ -103,18 +103,13 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.ImageViewHod
                 @Override
                 public void onClick(View view) {
                     House selectedHouse = mHouse.get(getAdapterPosition());
-                    if (AppDataStore.identity.buy(selectedHouse)){
-                        AppDataStore.UpdateBankView();
+                    if (AppDataStore.identity.buy(view.getContext(), selectedHouse)){
                         selectedHouse.setOwner(true);
                         interact_button.setEnabled(false);
                         interact_button.setText("Owned");
                         interact_button.setBackgroundColor(Color.WHITE);
                         Toast.makeText(view.getContext(),
                                 item_name.getText() +" is bought successfully!" , Toast.LENGTH_SHORT)
-                                .show();
-                    } else {
-                        Toast.makeText(view.getContext(),
-                                "Can't buy " + item_name.getText() , Toast.LENGTH_SHORT)
                                 .show();
                     }
                 }
