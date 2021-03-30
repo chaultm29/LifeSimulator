@@ -1,4 +1,4 @@
-package com.example.lifesimulator.Model;
+package com.example.lifesimulator.Interface;
 
 import android.view.View;
 

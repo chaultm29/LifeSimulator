@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.lifesimulator.Interface.IConfirm;
 import com.example.lifesimulator.R;
 
 import java.util.ArrayList;
