@@ -26,6 +26,7 @@ public class AppDataStore {
     public static ArrayList<Cure> cures;
     public static ArrayList<Leisure> leisures;
     public static ArrayList<Job> jobs;
+    public static ArrayList<University> universities;
 
     public static ProgressBar proHealthBar;
     public static ProgressBar proIntelBar;
@@ -91,8 +92,35 @@ public class AppDataStore {
     private static void initDefaultData(){
         leisures = getListLeisure();
         cures = getListCure();
+        jobs = getListJob();
+        universities = getListUniversity();
     }
 
+    private static ArrayList<University> getListUniversity(){
+        ArrayList<University> list = new ArrayList<>();
+
+        list.add(new University(R.drawable.university_classroom, "Đại học FPT", "Culi phần mềm"));
+        list.add(new University(R.drawable.university_classroom, "Đại học sư phạm", "Giáo viên mầm non"));
+        list.add(new University(R.drawable.university_music, "Đại học âm nhạc", "Ca sĩ dạo"));
+        list.add(new University(R.drawable.university_positive_dynamic, "Đại học ngoại thương", "Giao dịch viên"));
+        list.add(new University(R.drawable.university_stock_share, "Đại học kinh tế", "Marketing"));
+        list.add(new University(R.drawable.university_slug_eating, "Đại học nông nghiệp", "Kỹ sư nông nghiệp"));
+        list.add(new University(R.drawable.cure_doctor_female, "Đại học y", "Bác sĩ"));
+        list.add(new University(R.drawable.university_robot, "Đại học bách khoa", "Lắp ráp robot"));
+        return list;
+    }
+    private static ArrayList<Job> getListJob(){
+        ArrayList<Job> list = new ArrayList<>();
+        list.add(new Job(R.drawable.university_classroom, "Culi bưng trà rót nước cho PM", 10000));
+        list.add(new Job(R.drawable.university_classroom, "Giáo viên miền núi", 10000));
+        list.add(new Job(R.drawable.university_music, "Ca sĩ phòng trà", 10000));
+        list.add(new Job(R.drawable.university_positive_dynamic, "Bán cổ phiếu", 10000));
+        list.add(new Job(R.drawable.university_classroom, "Sale", 10000));
+        list.add(new Job(R.drawable.university_classroom, "Nuôi tằm", 10000));
+        list.add(new Job(R.drawable.cure_doctor_female, "Y tá", 10000));
+        list.add(new Job(R.drawable.university_classroom, "Bán linh kiện máy tính", 10000));
+        return list;
+    }
     private static ArrayList<Leisure> getListLeisure() {
         ArrayList<Leisure> list = new ArrayList<>();
         list.add(new Leisure("Nghỉ ngơi", 0, "+1 vui +1 iq", R.drawable.leisure_bed, new Condition(0,0,0,1, 1)));

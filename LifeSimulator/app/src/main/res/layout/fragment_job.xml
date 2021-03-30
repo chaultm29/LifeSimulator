@@ -18,12 +18,17 @@
             android:text="JOB"
             android:textColor="@android:color/holo_orange_light"
             android:textSize="18sp" />
-        <androidx.recyclerview.widget.RecyclerView
+
+        <FrameLayout
+            android:id="@+id/job_fragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/rcv_job"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="10dp"/>
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+               />
+        </FrameLayout>
 
     </LinearLayout>
 
