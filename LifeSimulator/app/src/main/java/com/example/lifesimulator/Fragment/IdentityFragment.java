@@ -52,7 +52,8 @@ public class IdentityFragment extends Fragment {
         btnGrowUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //chạy hàm thêm 1 tuổi của identity
+                AppDataStore.identity.GrowUp();
+                UpdateInformation();
             }
         });
     }

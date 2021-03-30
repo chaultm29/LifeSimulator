@@ -25,6 +25,12 @@ public class Identity {
         items = new ArrayList<>();
     }
 
+    public void GrowUp(){
+        this.age ++;
+        this.bank.newYear();
+        //condition
+    }
+
     public ArrayList<Item> getItems() {
         return items;
     }
