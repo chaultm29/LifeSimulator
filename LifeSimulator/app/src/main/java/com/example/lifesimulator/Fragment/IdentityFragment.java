@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.lifesimulator.Model.AppDataStore;
@@ -20,6 +21,11 @@ public class IdentityFragment extends Fragment {
     TextView txtName;
     TextView txtAge;
     TextView txtGender;
+    TextView txtDegree;
+    TextView txtJob;
+    TextView txtTotal;
+    TextView txtLoan;
+    Button btnGrowUp;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,8 +40,28 @@ public class IdentityFragment extends Fragment {
         txtName = view.findViewById(R.id.txtName);
         txtAge = view.findViewById(R.id.txtAge);
         txtGender = view.findViewById(R.id.txtGender);
+        txtDegree = view.findViewById(R.id.txtDegree);
+        txtJob = view.findViewById(R.id.txtJob);
+        txtTotal = view.findViewById(R.id.txtTotal);
+        txtLoan = view.findViewById(R.id.txtLoan);
+        btnGrowUp = view.findViewById(R.id.btnGrowUp);
+
         txtName.setText("Tên: " + AppDataStore.identity.getName());
-        txtAge.setText("Tuổi: " + AppDataStore.identity.getAge());
         txtGender.setText("Giới tính: " + (AppDataStore.identity.isGender()?"Nam":"Nữ"));
+        UpdateInformation();
+        btnGrowUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //chạy hàm thêm 1 tuổi của identity
+            }
+        });
+    }
+
+    public void UpdateInformation(){
+        txtAge.setText("Tuổi: " + AppDataStore.identity.getAge());
+        txtDegree.setText("Học vấn: " + AppDataStore.identity.getAge());
+        txtJob.setText("Công việc: " + AppDataStore.identity.getAge());
+        txtTotal.setText("Tổng tài sản: " + AppDataStore.identity.getBank().getAllMoney());
+        txtLoan.setText("Nợ: " + AppDataStore.identity.getBank().getAllLoan());
     }
 }

@@ -69,8 +69,8 @@ public class Bank {
     }
 
     public boolean getHotLoan(Context context, int money) {
-        if (loan+money <= 50000) {//limit of loan
-            loan += money;
+        if (hotLoan+money <= 50000) {//limit of loan
+            hotLoan += money;
             increase(money);
             Toast.makeText(context,"Anh em cho bạn vay! Giữ uy tín nhé" , Toast.LENGTH_SHORT).show();
             return true;
@@ -95,8 +95,8 @@ public class Bank {
         int thousand = money/1000;
         int million = money/1000000;
         int billion = money/1000000000;
-        if (billion > 0) return billion + "B";
-        else if (million > 0) return million + "M";
+        if (billion > 0) return billion + "B "+million + "M " +thousand + "K";
+        else if (million > 0) return million + "M " +thousand + "K";
         else if (thousand > 0) return thousand + "K";
         return money + "";
     }
@@ -108,4 +108,8 @@ public class Bank {
     public String getSavingMoneyString() {
         return convertMoneyString(savingMoney);
     }
+
+    public String getAllMoney(){ return convertMoneyString(cash+savingMoney);}
+
+    public String getAllLoan(){ return convertMoneyString(loan+hotLoan);}
 }
