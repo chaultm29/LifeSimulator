@@ -20,13 +20,16 @@ public class Bank {
 
     public void increase(int money){
         cash += money;
+        AppDataStore.UpdateBankView();
     }
 
-    public boolean decrease(int money) {
+    public boolean decrease(Context context, int money) {
         if (cash >= money) {
             cash -= money;
+            AppDataStore.UpdateBankView();
             return true;
         }
+        Toast.makeText(context,"Không đủ tiền!" , Toast.LENGTH_SHORT).show();
         return false;
     }
 
@@ -45,7 +48,7 @@ public class Bank {
     public boolean saveMoney(Context context, float ratio) {
         int sm = (int) Math.ceil(cash*ratio/100);
         if (sm > 0) {
-            decrease(sm);
+            decrease(context, sm);
             savingMoney += sm;
             Toast.makeText(context,"Gửi tiền thành công!" , Toast.LENGTH_SHORT).show();
             return true;
@@ -56,9 +59,8 @@ public class Bank {
 
     public boolean getLoan(Context context, int money) {
         if (loan+money <= 10000) {//limit of loan
-            cash += money;
             loan += money;
-            System.out.println(loan);
+            increase(money);
             Toast.makeText(context,"Vay ngân hàng thành công!" , Toast.LENGTH_SHORT).show();
             return true;
         }
@@ -68,9 +70,8 @@ public class Bank {
 
     public boolean getHotLoan(Context context, int money) {
         if (loan+money <= 50000) {//limit of loan
-            cash += money;
             loan += money;
-            System.out.println(loan);
+            increase(money);
             Toast.makeText(context,"Anh em cho bạn vay! Giữ uy tín nhé" , Toast.LENGTH_SHORT).show();
             return true;
         }

@@ -100,18 +100,13 @@ public class ItemAdapter extends  RecyclerView.Adapter<ItemAdapter.ImageViewHode
                 @Override
                 public void onClick(View view) {
                     Item selectedItem = mItem.get(getAdapterPosition());
-                    if (AppDataStore.identity.buy(selectedItem)){
-                        AppDataStore.UpdateBankView();
+                    if (AppDataStore.identity.buy(view.getContext(), selectedItem)){
                         selectedItem.setOwner(true);
                         interact_button.setEnabled(false);
                         interact_button.setText("Owned");
                         interact_button.setBackgroundColor(Color.WHITE);
                         Toast.makeText(view.getContext(),
                                 item_name.getText() +" is bought successfully!" , Toast.LENGTH_SHORT)
-                                .show();
-                    } else {
-                        Toast.makeText(view.getContext(),
-                                "Can't buy " + item_name.getText() , Toast.LENGTH_SHORT)
                                 .show();
                     }
                 }

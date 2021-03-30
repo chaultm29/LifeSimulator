@@ -80,16 +80,10 @@ public class CureAdapter extends RecyclerView.Adapter<CureAdapter.CureViewHolder
                 @Override
                 public void onClick(View view) {
                     Cure selectedCure = mListCure.get(getAdapterPosition());
-
-                    if (AppDataStore.identity.useCure(selectedCure)){
-                        AppDataStore.UpdateBankView();
+                    if (AppDataStore.identity.useCure(view.getContext(), selectedCure)){
                         AppDataStore.UpdateConditionView();
                         Toast.makeText(view.getContext(),
                                 title.getText() +" is bought successfully!" , Toast.LENGTH_SHORT)
-                                .show();
-                    } else {
-                        Toast.makeText(view.getContext(),
-                                "Can't buy " + title.getText() , Toast.LENGTH_SHORT)
                                 .show();
                     }
                 }

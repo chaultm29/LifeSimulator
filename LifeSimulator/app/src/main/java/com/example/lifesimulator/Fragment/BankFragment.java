@@ -11,10 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.lifesimulator.Interface.IGame;
 import com.example.lifesimulator.Model.AppDataStore;
 import com.example.lifesimulator.Model.AppDialog;
 import com.example.lifesimulator.Interface.IConfirm;
 import com.example.lifesimulator.R;
+
+import java.util.Random;
 
 
 public class BankFragment extends Fragment {
@@ -37,7 +40,7 @@ public class BankFragment extends Fragment {
         Button btnSave75 = view.findViewById(R.id.btnSave75);
         Button btnLoan = view.findViewById(R.id.btnLoan);
         Button btnHotLoan = view.findViewById(R.id.btnHotLoan);
-        Button btnGVietlot = view.findViewById(R.id.btnGVietlot);
+        Button btnGVietlot = view.findViewById(R.id.btnGVietlott);
         Button btnGBillionaire = view.findViewById(R.id.btnGBillionaire);
         Button btnGBit = view.findViewById(R.id.btnGBit);
         Button btnGReal = view.findViewById(R.id.btnGReal);
@@ -46,42 +49,36 @@ public class BankFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 AppDataStore.identity.getBank().withdraw(view.getContext(), 25 );
-                AppDataStore.UpdateBankView();
             }
         });
         btnWithdraw50.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AppDataStore.identity.getBank().withdraw(view.getContext(), 50 );
-                AppDataStore.UpdateBankView();
             }
         });
         btnWithdraw75.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AppDataStore.identity.getBank().withdraw(view.getContext(), 75 );
-                AppDataStore.UpdateBankView();
             }
         });
         btnSave25.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AppDataStore.identity.getBank().saveMoney(view.getContext(), 25 );
-                AppDataStore.UpdateBankView();
             }
         });
         btnSave50.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AppDataStore.identity.getBank().saveMoney(view.getContext(), 50 );
-                AppDataStore.UpdateBankView();
             }
         });
         btnSave75.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AppDataStore.identity.getBank().saveMoney(view.getContext(), 75 );
-                AppDataStore.UpdateBankView();
             }
         });
         btnLoan.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +88,6 @@ public class BankFragment extends Fragment {
                     @Override
                     public void doAgree() {
                         AppDataStore.identity.getBank().getLoan(view.getContext(), 10000 );
-                        AppDataStore.UpdateBankView();
                     }
 
                     @Override
@@ -109,12 +105,49 @@ public class BankFragment extends Fragment {
                     @Override
                     public void doAgree() {
                         AppDataStore.identity.getBank().getHotLoan(view.getContext(), 50000 );
-                        AppDataStore.UpdateBankView();
                     }
 
                     @Override
                     public void doCancel() {
                         //nothing
+                    }
+                });
+            }
+        });
+
+        btnGVietlot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppDialog.EzGameDialog(view.getContext(), AppDialog.GameName.VIETLOTT, new IGame() {
+                    @Override
+                    public int play(int select) {
+                        int bonus = -1;
+                        if (AppDataStore.identity.getBank().decrease(view.getContext(), 1000)){
+                            Random random = new Random();
+                            int value = random.nextInt(90)+10;
+                            bonus = value == select? 1000000: 0;
+                            AppDataStore.identity.getBank().increase(bonus);
+                        }
+                        return bonus;
+                    }
+                });
+            }
+        });
+
+        btnGBit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppDialog.EzGameDialog(view.getContext(), AppDialog.GameName.BIT, new IGame() {
+                    @Override
+                    public int play(int select) {
+                        int bonus = -1;
+                        if (AppDataStore.identity.getBank().decrease(view.getContext(), 5000)){
+                            Random random = new Random();
+                            int value = random.nextInt(2);
+                            bonus = value == select? 10000: 0;
+                            AppDataStore.identity.getBank().increase(bonus);
+                        }
+                        return bonus;
                     }
                 });
             }

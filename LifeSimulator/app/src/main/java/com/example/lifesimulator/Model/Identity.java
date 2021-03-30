@@ -1,5 +1,7 @@
 package com.example.lifesimulator.Model;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 
 public class Identity {
@@ -29,8 +31,8 @@ public class Identity {
         return houses;
     }
 
-    public boolean buy(NetWorth thing){
-        return bank.decrease(thing.price);
+    public boolean buy(Context context, NetWorth thing){
+        return bank.decrease(context, thing.price);
     }
 
     public Bank getBank() {
@@ -57,16 +59,16 @@ public class Identity {
         return gender;
     }
 
-    public boolean doLeisure(Leisure leisure){
-        if(bank.decrease(leisure.getFee())){
+    public boolean doLeisure(Context context, Leisure leisure){
+        if(bank.decrease(context, leisure.getFee())){
             condition.effect(leisure.getEffect());
             return true;
         }
         return false;
     }
 
-    public  boolean useCure(Cure cure) {
-        if(bank.decrease(cure.getFee())){
+    public  boolean useCure(Context context, Cure cure) {
+        if(bank.decrease(context, cure.getFee())){
             condition.effect(cure.getEffect());
             return true;
         }
