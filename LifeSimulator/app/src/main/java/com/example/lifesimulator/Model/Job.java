@@ -3,14 +3,12 @@ package com.example.lifesimulator.Model;
 public class Job {
     int resourceID;
     String name;
-    float grossSalary;
-    int progress;
+    int grossSalary;
 
-    public Job(int resourceID, String name, float grossSalary, int progress) {
+    public Job(int resourceID, String name, int grossSalary) {
         this.resourceID = resourceID;
         this.name = name;
         this.grossSalary = grossSalary;
-        this.progress = progress;
     }
 
     public int getResourceID() {
@@ -29,19 +27,12 @@ public class Job {
         this.name = name;
     }
 
-    public float getGrossSalary() {
+    public int getGrossSalary() {
         return grossSalary;
     }
 
-    public void setGrossSalary(float grossSalary) {
+    public void setGrossSalary(int grossSalary) {
         this.grossSalary = grossSalary;
     }
 
-    public int getProgress() {
-        return progress;
-    }
-
-    public void setProgress(int progress) {
-        this.progress = progress;
-    }
 }

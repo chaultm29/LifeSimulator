@@ -12,6 +12,8 @@ public class Identity {
     private Bank bank;
     private ArrayList<House> houses;
     private ArrayList<Item> items;
+    private University university;
+    private Job job;
 
     public Identity() {
         this.name = "Min";
@@ -73,5 +75,14 @@ public class Identity {
             return true;
         }
         return false;
+    }
+
+    public void setJob(Job job){
+       this.job = job;
+
+    }
+
+    public void  setUniversity(University university){
+        this.university = university;
     }
 }
