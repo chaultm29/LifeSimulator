@@ -3,14 +3,14 @@ package com.example.lifesimulator.Model;
 public abstract class NetWorth {
     protected String code;
     protected String name ;
-    protected float price ;
+    protected int price ;
     protected String description;
     protected boolean isOwner;
 
     public NetWorth() {
     }
 
-    public NetWorth(String code, String name, float price, String description, boolean isOwner) {
+    public NetWorth(String code, String name, int price, String description, boolean isOwner) {
         this.code = code;
         this.name = name;
         this.price = price;
@@ -46,7 +46,7 @@ public abstract class NetWorth {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

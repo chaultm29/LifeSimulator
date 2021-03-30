@@ -25,16 +25,8 @@ public class Identity {
         return items;
     }
 
-    public void setItems(ArrayList<Item> items) {
-        this.items = items;
-    }
-
     public ArrayList<House> getHouses() {
         return houses;
-    }
-
-    public void setHouses(ArrayList<House> houses) {
-        this.houses = houses;
     }
 
     public boolean buy(NetWorth thing){
@@ -45,16 +37,8 @@ public class Identity {
         return bank;
     }
 
-    public void setBank(Bank bank) {
-        this.bank = bank;
-    }
-
     public Condition getCondition() {
         return condition;
-    }
-
-    public void setCondition(Condition condition) {
-        this.condition = condition;
     }
 
     public String getName() {
@@ -69,16 +53,8 @@ public class Identity {
         return age;
     }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     public boolean isGender() {
         return gender;
-    }
-
-    public void setGender(boolean gender) {
-        this.gender = gender;
     }
 
     public boolean doLeisure(Leisure leisure){

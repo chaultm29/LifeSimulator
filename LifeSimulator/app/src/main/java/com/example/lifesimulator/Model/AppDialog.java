@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class AppDialog {
 
-    public static void InfoDialog(String info, Boolean status, Context context){
+    public static void InfoDialog(Context context, String info, Boolean status){
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.dialog_information);
 
@@ -36,7 +36,33 @@ public class AppDialog {
         dialog.show();
     }
 
-    public static void QuestionDialog(Question question, Context context){
+    public static void ConfirmDialog(Context context, String info, IConfirm confirm){
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.dialog_confirm);
+
+        TextView txtInfo = (TextView) dialog.findViewById(R.id.txtInfo2);
+        Button btnAgree = (Button) dialog.findViewById(R.id.btnAgree);
+        Button btnCancel = (Button) dialog.findViewById(R.id.btnCancel);
+
+        txtInfo.setText(info);
+        btnAgree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                confirm.doAgree();
+                dialog.dismiss();
+            }
+        });
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                confirm.doCancel();
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+    public static void QuestionDialog(Context context, Question question){
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.dialog_question);
 
@@ -60,7 +86,7 @@ public class AppDialog {
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    InfoDialog((boolean)btn.getTag()?"Chính xác":"Sai", (boolean)btn.getTag(), view.getContext());
+                    InfoDialog(view.getContext(), (boolean)btn.getTag()?"Chính xác":"Sai", (boolean)btn.getTag());
                     dialog.dismiss();
                 }
             });

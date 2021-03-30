@@ -67,9 +67,9 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
             interactButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    AppDialog.InfoDialog("hi", null, view.getContext());
+                    AppDialog.InfoDialog(view.getContext(), "hi", null);
                     //Question q = new Question("hiii", new String[]{"um", "uk", "uh", "ò"}, 3);
-                    //AppDialog.QuestionDialog(q, view.getContext());
+                    //AppDialog.QuestionDialog(view.getContext(),q);
                 }
             });
         }

@@ -3,7 +3,7 @@ package com.example.lifesimulator.Model;
 public class Leisure {
     private String name;
     private String requiredItem;
-    private float fee;
+    private int fee;
     private String description;
     private int resourceID;
     private  Condition effect;
@@ -12,7 +12,7 @@ public class Leisure {
 
     }
 
-    public Leisure(String name, String requiredItem, float fee, String description, int resourceID) {
+    public Leisure(String name, String requiredItem, int fee, String description, int resourceID) {
         this.name = name;
         this.requiredItem = requiredItem;
         this.fee = fee;
@@ -20,7 +20,7 @@ public class Leisure {
         this.resourceID = resourceID;
     }
 
-    public Leisure(String name, float fee, String description, int resourceID, Condition effect) {
+    public Leisure(String name, int fee, String description, int resourceID, Condition effect) {
         this.name = name;
         this.fee = fee;
         this.description = description;
@@ -44,11 +44,11 @@ public class Leisure {
         this.requiredItem = requiredItem;
     }
 
-    public float getFee() {
+    public int getFee() {
         return fee;
     }
 
-    public void setFee(float fee) {
+    public void setFee(int fee) {
         this.fee = fee;
     }
 

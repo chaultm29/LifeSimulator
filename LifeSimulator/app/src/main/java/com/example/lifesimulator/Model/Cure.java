@@ -3,11 +3,11 @@ package com.example.lifesimulator.Model;
 public class Cure {
     private int resourceID;
     private String name;
-    private float fee;
+    private int fee;
     private String description;
     private Condition effect;
 
-    public Cure(String name, float fee, String description,int resourceID, Condition effect) {
+    public Cure(String name, int fee, String description,int resourceID, Condition effect) {
 
         this.name = name;
         this.fee = fee;
@@ -32,11 +32,11 @@ public class Cure {
         this.name = name;
     }
 
-    public float getFee() {
+    public int getFee() {
         return fee;
     }
 
-    public void setFee(float fee) {
+    public void setFee(int fee) {
         this.fee = fee;
     }
 
