@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import com.example.lifesimulator.Adapter.HouseAdapter;
 import com.example.lifesimulator.Adapter.WorkAdapter;
 import com.example.lifesimulator.Model.AppDataStore;
+import com.example.lifesimulator.Model.AppDialog;
 import com.example.lifesimulator.R;
 
 /**
@@ -35,6 +36,11 @@ public class WorkSelectFragment extends Fragment {
 
     public WorkSelectFragment() {
         // Required empty public constructor
+    }
+
+    private Object parent;
+    public WorkSelectFragment(Object parent) {
+        this.parent = parent;
     }
 
     /**
@@ -77,9 +83,10 @@ public class WorkSelectFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         job_rcv = view.findViewById(R.id.job_list);
-        workAdapter = new WorkAdapter();
+        workAdapter = new WorkAdapter(this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
         job_rcv.setAdapter(workAdapter);
         job_rcv.setLayoutManager(linearLayoutManager);
+
     }
 }

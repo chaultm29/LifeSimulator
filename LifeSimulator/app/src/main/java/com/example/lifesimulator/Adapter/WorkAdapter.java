@@ -9,10 +9,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.lifesimulator.Fragment.WorkProcessFragment;
+import com.example.lifesimulator.Interface.IConfirm;
 import com.example.lifesimulator.Model.AppDataStore;
+import com.example.lifesimulator.Model.AppDialog;
 import com.example.lifesimulator.Model.Job;
+import com.example.lifesimulator.Model.Question;
 import com.example.lifesimulator.Model.University;
 import com.example.lifesimulator.R;
 
@@ -21,12 +26,13 @@ import java.util.List;
 public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.WorkViewHolder> {
     private List<Job> mListJob;
     private List<University> mListUniversity;
+    private Fragment mFragment;
 
-    public WorkAdapter() {
-        if (false) this.mListJob = AppDataStore.jobs;
+    public WorkAdapter(Fragment fragment) {
+        if (true) this.mListJob = AppDataStore.jobs;
         else
             this.mListUniversity = AppDataStore.universities;
-
+        mFragment = fragment;
     }
 
     @NonNull
@@ -38,7 +44,7 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.WorkViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull WorkViewHolder holder, int position) {
-        if (false){
+        if (true){
             Job job = mListJob.get(position);
             System.out.println(job.getName());
             if(job==null)
@@ -63,7 +69,7 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.WorkViewHolder
 
     @Override
     public int getItemCount() {
-        if (false){
+        if (true){
             if(mListJob!=null){
                 return mListJob.size();
             }
@@ -94,14 +100,50 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.WorkViewHolder
             interactButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //AppDialog.InfoDialog(view.getContext(), "hi", null);
+//                    AppDialog.InfoDialog(view.getContext(), "hi", null);
 //                    Question q = new Question("hiii", new String[]{"um", "uk", "uh", "ò"}, 3);
 //                    AppDialog.QuestionDialog(view.getContext(),q);
-                    if (false){
+                    if (true){
                         AppDataStore.identity.setJob(mListJob.get(getAdapterPosition()));
+                        Question q = new Question("Dưới nước có 3 con vịt, hỏi ông thuyền trưởng bao tuổi?", new String[]{"20", "3 xịch", "100 tủi", "Tào lao"}, 3);
+                        AppDialog.QuestionDialog(view.getContext(), q, new IConfirm() {
+                            @Override
+                            public void doAgree() {
+                                if(AppDialog.getResult()){
+                                    mFragment.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.job_select, new WorkProcessFragment()).commit();
+                                    mListJob = null;
+                                    mListUniversity = null;
+                                    notifyDataSetChanged();
+                                }
+                            }
+
+                            @Override
+                            public void doCancel() {
+
+                            }
+                        });
                     }
                     else {
+
                         AppDataStore.identity.setUniversity(mListUniversity.get(getAdapterPosition()));
+                        //AppDialog.InfoDialog(view.getContext(), "hi", null);
+                        Question q = new Question("Dưới nước có 3 con vịt, hỏi ông thuyền trưởng bao tuổi?", new String[]{"20", "3 xịch", "100 tủi", "Tào lao"}, 3);
+                        AppDialog.QuestionDialog(view.getContext(), q, new IConfirm() {
+                            @Override
+                            public void doAgree() {
+                                if(AppDialog.getResult()){
+                                    mFragment.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.job_select, new WorkProcessFragment()).commit();
+                                    mListJob = null;
+                                    mListUniversity = null;
+                                    notifyDataSetChanged();
+                                }
+                            }
+
+                            @Override
+                            public void doCancel() {
+
+                            }
+                        });
                     }
                 }
             });
