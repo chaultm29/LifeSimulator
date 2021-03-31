@@ -123,8 +123,7 @@ public class BankFragment extends Fragment {
                     public int play(int select) {
                         int bonus = -1;
                         if (AppDataStore.identity.getBank().decrease(view.getContext(), 1000)){
-                            Random random = new Random();
-                            int value = random.nextInt(90)+10;
+                            int value = AppDataStore.Generate(10, 99);
                             bonus = value == select? 1000000: 0;
                             AppDataStore.identity.getBank().increase(bonus);
                         }

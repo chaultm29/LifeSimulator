@@ -1,6 +1,7 @@
 package com.example.lifesimulator.Model;
 
 import android.content.Context;
+import android.view.View;
 
 import java.util.ArrayList;
 
@@ -19,10 +20,22 @@ public class Identity {
         this.name = "Min";
         this.age = 1;
         this.gender = false;
-        condition = new Condition(30, 3, 100, 80, 80);
-        bank = new Bank();
+        condition = new Condition();
+        bank = new Bank(10000);
         houses = new ArrayList<>();
         items = new ArrayList<>();
+    }
+
+    public void GrowUp(View view){
+        this.age ++;
+        this.bank.newYear();
+        this.condition.UpHeight(this.age);
+        LifeEvent lifeEvent = AppDataStore.GetLifeEvent(Milestone.NEWAGE);
+        if (lifeEvent != null) {
+            AppDialog.InfoDialog(view.getContext(), lifeEvent.getContent(), null);
+            this.bank.effect(lifeEvent.getEffectBank());
+            this.condition.effect(lifeEvent.getEffectCondition());
+        } else AppDialog.InfoDialog(view.getContext(), "Năm nay không có gì nổi bật", null);//Chắc sẽ ko vào
     }
 
     public ArrayList<Item> getItems() {
