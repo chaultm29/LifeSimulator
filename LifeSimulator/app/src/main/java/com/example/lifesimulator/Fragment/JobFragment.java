@@ -47,7 +47,7 @@ public class JobFragment extends Fragment {
 
 
         if(AppDataStore.identity.getAge()<18){
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.job_fragment, new WorkSelectFragment()).commit();
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.job_fragment, new WorkSelectFragment(this)).commit();
         }
     }
 

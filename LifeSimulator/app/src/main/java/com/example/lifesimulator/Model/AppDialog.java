@@ -117,7 +117,15 @@ public class AppDialog {
         dialog.show();
     }
 
-    public static void QuestionDialog(Context context, Question question){
+    private static boolean checkAnswer;
+    public static boolean getResult(){
+        boolean temp = checkAnswer;
+        checkAnswer = false;
+        System.out.println(temp);
+        return  temp;
+    }
+
+    public static void QuestionDialog(Context context, Question question, IConfirm confirm){
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.dialog_question);
 
@@ -142,6 +150,8 @@ public class AppDialog {
                 @Override
                 public void onClick(View view) {
                     InfoDialog(view.getContext(), (boolean)btn.getTag()?"Chính xác":"Sai", (boolean)btn.getTag());
+                    checkAnswer = (boolean) btn.getTag();
+                    confirm.doAgree();
                     dialog.dismiss();
                 }
             });
