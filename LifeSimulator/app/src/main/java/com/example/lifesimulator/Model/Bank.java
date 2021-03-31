@@ -14,7 +14,10 @@ public class Bank {
     private int countHotLoan;
 
     public Bank() {
-        cash = 1000;
+    }
+
+    public Bank(int cash) {
+        this.cash = cash;
     }
 
     public Bank(int cash, int savingMoney) {
@@ -60,6 +63,17 @@ public class Bank {
         if (countLoan > 5) status += 1;
         if (countHotLoan > 5) status += 2;
         return status;
+    }
+
+    public void effect(Bank other) {
+        this.cash += other.getCash();
+        this.cash = this.cash < 0 ? 0 : this.cash;
+        this.savingMoney += other.getSavingMoney();
+        this.loan += other.getLoan();
+        this.hotLoan += other.getHotLoan();
+        this.countLoan += other.getCountLoan();
+        this.countHotLoan += other.getCountHotLoan();
+        AppDataStore.UpdateBankView();
     }
 
     public void increase(int money){
@@ -159,4 +173,32 @@ public class Bank {
     public String getAllMoney(){ return convertMoneyString(cash+savingMoney);}
 
     public String getAllLoan(){ return convertMoneyString(loan+revenue+hotLoan);}
+
+    public int getCash() {
+        return cash;
+    }
+
+    public int getSavingMoney() {
+        return savingMoney;
+    }
+
+    public int getLoan() {
+        return loan;
+    }
+
+    public int getHotLoan() {
+        return hotLoan;
+    }
+
+    public int getCountLoan() {
+        return countLoan;
+    }
+
+    public int getRevenue() {
+        return revenue;
+    }
+
+    public int getCountHotLoan() {
+        return countHotLoan;
+    }
 }

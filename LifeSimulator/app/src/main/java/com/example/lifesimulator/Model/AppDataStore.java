@@ -20,6 +20,7 @@ import com.example.lifesimulator.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class AppDataStore {
     public static Identity identity;
@@ -27,6 +28,7 @@ public class AppDataStore {
     public static ArrayList<Leisure> leisures;
     public static ArrayList<Job> jobs;
     public static ArrayList<University> universities;
+    public static ArrayList<LifeEvent> lifeEvents;
 
     public static ProgressBar proHealthBar;
     public static ProgressBar proIntelBar;
@@ -45,6 +47,32 @@ public class AppDataStore {
         Bank bank = identity.getBank();
         txtCash.setText("$ " + bank.getCashString());
         txtSaving.setText("$ " + bank.getSavingMoneyString());
+    }
+
+    public static int Generate(int min, int max){
+        Random random = new Random();
+        return random.nextInt(max - min + 1) + min;
+    }
+
+    public static LifeEvent GetLifeEvent(Milestone... milestones){
+        int total = 0;
+        for (LifeEvent event : lifeEvents) {
+            for (Milestone m : milestones) {
+                if (event.getMilestone() == m) total++;
+            }
+        }
+        if (total > 0){
+            int eventIndex = AppDataStore.Generate(1, total);
+            total = 0;
+            for (LifeEvent event : lifeEvents) {
+                for (Milestone m : milestones) {
+                    if (event.getMilestone() == m && ++total == eventIndex){
+                        return  event;
+                    };
+                }
+            }
+        }
+        return null;
     }
 
     public static void LoadData(Context context) {
@@ -94,6 +122,7 @@ public class AppDataStore {
         cures = getListCure();
         jobs = getListJob();
         universities = getListUniversity();
+        lifeEvents = getListLifeEvent();
     }
 
     private static ArrayList<University> getListUniversity(){
@@ -141,6 +170,17 @@ public class AppDataStore {
         list.add(new Cure("Đi khám bác sĩ", 1000, "+10 khỏe", R.drawable.cure_doctor_female, new Condition(0, 0, 10, 0, 0)));
         list.add(new Cure("Ở bệnh xá", 2000, "+20 khỏe", R.drawable.cure_hospital_bed, new Condition(0, 0, 20, 0, 0)));
         list.add(new Cure("Đi hóa trị", 20000, "+50 khỏe", R.drawable.cure_treatment_plan, new Condition(0, 0, 50, 0, 0)));
+        return list;
+    }
+
+    private static ArrayList<LifeEvent> getListLifeEvent() {
+        ArrayList<LifeEvent> list = new ArrayList<>();
+        list.add(new LifeEvent("Bir1", Milestone.BIRTH, "Bạn được sinh ra trong một gia đình giàu có, bố mẹ để cho bạn 100K khi vừa chào đời.", new Bank(100000), new Condition() ));
+        list.add(new LifeEvent("Bir2", Milestone.BIRTH, "Bạn được sinh ra trong một gia đình bình thường, được bố mẹ chăm lo chu đáo nên mạnh khỏe, hạnh phúc", new Bank(), new Condition(50, 4, 95,95,80)));
+        list.add(new LifeEvent("New1", Milestone.NEWAGE, "Năm nay bố hứa được học sinh giỏi sẽ dẫn đi chơi, bạn nỗ lực và đặt được kết quả tốt", new Bank(), new Condition(0,0,0,10,5) ));
+        list.add(new LifeEvent("New2", Milestone.NEWAGE, "Chả hiểu sao đang đi đường có đứa quăng cái dép vêu cả mồm, đi khám mất 100 đồng", new Bank(-100), new Condition(0,0,-10,-5,-5) ));
+        list.add(new LifeEvent("New3", Milestone.NEWAGE, "Thầy bói bảo ra đường chú ý nhìn trước nhìn sau, thế là không nhìn 2 bên nên bị ô tô đâm nằm viện. May mà không mất tiền viện phí", new Bank(), new Condition(0,-5,-20,-5,-5) ));
+        list.add(new LifeEvent("New4", Milestone.NEWAGE, "Đầu năm đi chúc tết tự nhiên nhặt được phong bao dầy cộp, bên trong có 10k tiền lẻ T.T Thôi cũng đủ hạnh phúc rồi", new Bank(), new Condition(0,5,5,10, 1) ));
         return list;
     }
 

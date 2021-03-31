@@ -52,7 +52,7 @@ public class IdentityFragment extends Fragment {
         btnGrowUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AppDataStore.identity.GrowUp();
+                AppDataStore.identity.GrowUp(view);
                 UpdateInformation();
             }
         });

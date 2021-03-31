@@ -1,17 +1,24 @@
 package com.example.lifesimulator.Model;
 
 public class Condition {
-    private float height;
-    private float weight;
+    private int height;
+    private int weight;
     private int health;
     private int happiness;
     private int intelligence;
 
+    private int maxHeight;
+
     public Condition() {
-        //random condition in here
+        this.height = AppDataStore.Generate(45, 55);
+        this.weight = AppDataStore.Generate(3, 5);
+        this.health = AppDataStore.Generate(80, 100);
+        this.happiness = AppDataStore.Generate(80, 100);
+        this.intelligence = AppDataStore.Generate(80, 90);
+        this.maxHeight = AppDataStore.Generate(145, 190);
     }
 
-    public Condition(float height, float weight, int health, int happiness, int intelligence) {
+    public Condition(int height, int weight, int health, int happiness, int intelligence) {
         this.height = height;
         this.weight = weight;
         this.health = health;
@@ -19,7 +26,18 @@ public class Condition {
         this.intelligence = intelligence;
     }
 
+    public int UpHeight(int age){
+        if (age < 28){
+            int remainH = maxHeight - this.height;
+            int addH = AppDataStore.Generate(0, remainH);
+            this.height =  addH;
+            return addH;
+        }
+        return 0;
+    }
+
     public void effect(Condition other) {
+
         this.height += other.getHeight();
         this.weight += other.getWeight();
         this.health += other.getHealth();
@@ -27,43 +45,27 @@ public class Condition {
         this.intelligence += other.getIntelligence();
     }
 
-    public float getHeight() {
-        return height;
+    public void setHeight(int height) {
+        this.height = height;
     }
 
-    public void setHeight(float height) {
-        this.height = height;
+    public float getHeight() {
+        return height;
     }
 
     public float getWeight() {
         return weight;
     }
 
-    public void setWeight(float weight) {
-        this.weight = weight;
-    }
-
     public int getHealth() {
         return health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
     }
 
     public int getHappiness() {
         return happiness;
     }
 
-    public void setHappiness(int happiness) {
-        this.happiness = happiness;
-    }
-
     public int getIntelligence() {
         return intelligence;
-    }
-
-    public void setIntelligence(int intelligence) {
-        this.intelligence = intelligence;
     }
 }
