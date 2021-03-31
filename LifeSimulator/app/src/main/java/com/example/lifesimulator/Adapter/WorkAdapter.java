@@ -16,6 +16,7 @@ import com.example.lifesimulator.Fragment.WorkProcessFragment;
 import com.example.lifesimulator.Interface.IConfirm;
 import com.example.lifesimulator.Model.AppDataStore;
 import com.example.lifesimulator.Model.AppDialog;
+import com.example.lifesimulator.Model.Degree;
 import com.example.lifesimulator.Model.Job;
 import com.example.lifesimulator.Model.Question;
 import com.example.lifesimulator.Model.University;
@@ -29,9 +30,8 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.WorkViewHolder
     private Fragment mFragment;
 
     public WorkAdapter(Fragment fragment) {
-        if (true) this.mListJob = AppDataStore.jobs;
-        else
-            this.mListUniversity = AppDataStore.universities;
+        if (AppDataStore.identity.getDegree() == Degree.SELECTWORK) this.mListJob = AppDataStore.jobs;
+        if (AppDataStore.identity.getDegree() == Degree.SELECTUNI) this.mListUniversity = AppDataStore.universities;
         mFragment = fragment;
     }
 
@@ -44,7 +44,7 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.WorkViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull WorkViewHolder holder, int position) {
-        if (true){
+        if (AppDataStore.identity.getDegree() == Degree.SELECTWORK){
             Job job = mListJob.get(position);
             System.out.println(job.getName());
             if(job==null)
@@ -53,7 +53,7 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.WorkViewHolder
             holder.title.setText(job.getName());
             holder.interactButton.setText("Apply");
             holder.description.setText(String.valueOf(job.getGrossSalary()));
-        } else {
+        } else if (AppDataStore.identity.getDegree() == Degree.SELECTUNI){
             System.out.println(position);
             University university = mListUniversity.get(position);
             System.out.println(university.getName());
@@ -64,16 +64,15 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.WorkViewHolder
             holder.interactButton.setText("Apply");
             holder.description.setText(university.getMajor());
         }
-
     }
 
     @Override
     public int getItemCount() {
-        if (true){
+        if (AppDataStore.identity.getDegree() == Degree.SELECTWORK){
             if(mListJob!=null){
                 return mListJob.size();
             }
-        } else {
+        } else if (AppDataStore.identity.getDegree() == Degree.SELECTUNI){
             if(mListUniversity!=null){
                 return  mListUniversity.size();
             }
@@ -103,13 +102,14 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.WorkViewHolder
 //                    AppDialog.InfoDialog(view.getContext(), "hi", null);
 //                    Question q = new Question("hiii", new String[]{"um", "uk", "uh", "ò"}, 3);
 //                    AppDialog.QuestionDialog(view.getContext(),q);
-                    if (true){
-                        AppDataStore.identity.setJob(mListJob.get(getAdapterPosition()));
+                    if (AppDataStore.identity.getDegree() == Degree.SELECTWORK){
                         Question q = new Question("Dưới nước có 3 con vịt, hỏi ông thuyền trưởng bao tuổi?", new String[]{"20", "3 xịch", "100 tủi", "Tào lao"}, 3);
                         AppDialog.QuestionDialog(view.getContext(), q, new IConfirm() {
                             @Override
                             public void doAgree() {
                                 if(AppDialog.getResult()){
+                                    AppDataStore.identity.setJob(mListJob.get(getAdapterPosition()));
+                                    AppDataStore.identity.setDegree(Degree.WORK);
                                     mFragment.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.job_select, new WorkProcessFragment()).commit();
                                     mListJob = null;
                                     mListUniversity = null;
@@ -123,15 +123,15 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.WorkViewHolder
                             }
                         });
                     }
-                    else {
-
-                        AppDataStore.identity.setUniversity(mListUniversity.get(getAdapterPosition()));
+                    else if (AppDataStore.identity.getDegree() == Degree.SELECTUNI){
                         //AppDialog.InfoDialog(view.getContext(), "hi", null);
                         Question q = new Question("Dưới nước có 3 con vịt, hỏi ông thuyền trưởng bao tuổi?", new String[]{"20", "3 xịch", "100 tủi", "Tào lao"}, 3);
                         AppDialog.QuestionDialog(view.getContext(), q, new IConfirm() {
                             @Override
                             public void doAgree() {
                                 if(AppDialog.getResult()){
+                                    AppDataStore.identity.setUniversity(mListUniversity.get(getAdapterPosition()));
+                                    AppDataStore.identity.setDegree(Degree.UNIVERSITY);
                                     mFragment.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.job_select, new WorkProcessFragment()).commit();
                                     mListJob = null;
                                     mListUniversity = null;

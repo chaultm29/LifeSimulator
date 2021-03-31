@@ -2,12 +2,18 @@ package com.example.lifesimulator.Fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.example.lifesimulator.Model.AppDataStore;
+import com.example.lifesimulator.Model.Degree;
 import com.example.lifesimulator.R;
 
 /**
@@ -62,5 +68,26 @@ public class WorkProcessFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_work_process, container, false);
+    }
+
+    Button btnWork;
+    Button btnTest;
+    Button btnStop;
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        btnWork = view.findViewById(R.id.btnWork);
+        btnTest = view.findViewById(R.id.btnTest);
+        btnStop = view.findViewById(R.id.btnStopWork);
+        if (AppDataStore.identity.getDegree() == Degree.WORK){
+            btnWork.setText("Làm việc");
+            btnTest.setText("Đòi sếp tăng lương");
+            btnStop.setText("Bỏ việc");
+        } else {
+            btnWork.setText("Học");
+            btnTest.setText("Làm bài thi");
+            btnStop.setText("Trốn học đi chơi");
+        }
     }
 }

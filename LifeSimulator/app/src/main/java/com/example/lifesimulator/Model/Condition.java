@@ -12,9 +12,9 @@ public class Condition {
     public Condition() {
         this.height = AppDataStore.Generate(45, 55);
         this.weight = AppDataStore.Generate(3, 5);
-        this.health = AppDataStore.Generate(80, 100);
-        this.happiness = AppDataStore.Generate(80, 100);
-        this.intelligence = AppDataStore.Generate(80, 90);
+        this.health = AppDataStore.Generate(60, 80);
+        this.happiness = AppDataStore.Generate(60, 80);
+        this.intelligence = AppDataStore.Generate(40, 60);
         this.maxHeight = AppDataStore.Generate(145, 190);
     }
 
@@ -37,12 +37,12 @@ public class Condition {
     }
 
     public void effect(Condition other) {
-
         this.height += other.getHeight();
         this.weight += other.getWeight();
         this.health += other.getHealth();
         this.happiness += other.getHappiness();
         this.intelligence += other.getIntelligence();
+        AppDataStore.UpdateConditionView();
     }
 
     public void setHeight(int height) {

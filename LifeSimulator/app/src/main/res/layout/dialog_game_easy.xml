@@ -53,12 +53,12 @@
         android:id="@+id/imgDes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="@+id/txtInfo3"
-        app:layout_constraintHeight_max="100dp"
+        app:layout_constraintHeight_max="75dp"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="@+id/txtInfo3"
         app:layout_constraintTop_toBottomOf="@+id/txtInfo3"
-        app:layout_constraintWidth_max="100dp"
+        app:layout_constraintWidth_max="75dp"
         app:srcCompat="@android:drawable/divider_horizontal_bright" />
 </androidx.constraintlayout.widget.ConstraintLayout>

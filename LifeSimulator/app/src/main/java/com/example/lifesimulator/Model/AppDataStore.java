@@ -8,12 +8,6 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.lang.reflect.Type;
 
 import com.example.lifesimulator.R;
@@ -35,6 +29,36 @@ public class AppDataStore {
     public static ProgressBar proHappyBar;
     public static TextView txtCash;
     public static TextView txtSaving;
+
+    public static void LoadData(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("lifesimulator", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("identity", null);
+        Type type = new TypeToken<Identity>(){}.getType();
+        identity = gson.fromJson(json, type);
+        initDefaultData();
+        if (identity == null){
+            identity = new Identity();
+            identity.EventBirth(context);
+            initData();
+        }
+    }
+
+    public static void SaveData(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("lifesimulator", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(identity);
+        editor.putString("identity", json);
+        editor.apply();
+    }
+
+    public static void ClearData(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("lifesimulator", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("identity", null);
+        editor.apply();
+    }
 
     public static void UpdateConditionView(){
         Condition condition = identity.getCondition();
@@ -75,35 +99,6 @@ public class AppDataStore {
         return null;
     }
 
-    public static void LoadData(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("lifesimulator", Context.MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = sharedPreferences.getString("identity", null);
-        Type type = new TypeToken<Identity>(){}.getType();
-        identity = gson.fromJson(json, type);
-        if (identity == null){
-            identity = new Identity();
-            initData();
-        }
-        initDefaultData();
-    }
-
-    public static void SaveData(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("lifesimulator", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(identity);
-        editor.putString("identity", json);
-        editor.apply();
-    }
-
-    public static void ClearData(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("lifesimulator", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("identity", null);
-        editor.apply();
-    }
-
     private static void initData(){
         ArrayList<House> houses = AppDataStore.identity.getHouses();
         for (int i = 1; i <= 5; i++) {
@@ -140,14 +135,14 @@ public class AppDataStore {
     }
     private static ArrayList<Job> getListJob(){
         ArrayList<Job> list = new ArrayList<>();
-        list.add(new Job(R.drawable.university_classroom, "Culi bưng trà rót nước cho PM", 10000));
-        list.add(new Job(R.drawable.university_classroom, "Giáo viên miền núi", 10000));
-        list.add(new Job(R.drawable.university_music, "Ca sĩ phòng trà", 10000));
-        list.add(new Job(R.drawable.university_positive_dynamic, "Bán cổ phiếu", 10000));
-        list.add(new Job(R.drawable.university_classroom, "Sale", 10000));
-        list.add(new Job(R.drawable.university_classroom, "Nuôi tằm", 10000));
-        list.add(new Job(R.drawable.cure_doctor_female, "Y tá", 10000));
-        list.add(new Job(R.drawable.university_classroom, "Bán linh kiện máy tính", 10000));
+        list.add(new Job(R.drawable.university_classroom, "Lập trình viên", "Culi bưng trà rót nước cho PM", 10000));
+        list.add(new Job(R.drawable.university_classroom, "Giáo viên","Giáo viên miền núi", 10000));
+        list.add(new Job(R.drawable.university_music, "Ca sĩ","Ca sĩ phòng trà", 10000));
+        list.add(new Job(R.drawable.university_positive_dynamic, "Nhà đầu tư","Bán cổ phiếu", 10000));
+        list.add(new Job(R.drawable.university_classroom, "Sale","Sale", 10000));
+        list.add(new Job(R.drawable.university_classroom, "Nông dân","Nuôi tằm", 10000));
+        list.add(new Job(R.drawable.cure_doctor_female, "Y tá","Y tá", 10000));
+        list.add(new Job(R.drawable.university_classroom, "Thợ máy","Bán linh kiện máy tính", 10000));
         return list;
     }
     private static ArrayList<Leisure> getListLeisure() {
@@ -176,11 +171,11 @@ public class AppDataStore {
     private static ArrayList<LifeEvent> getListLifeEvent() {
         ArrayList<LifeEvent> list = new ArrayList<>();
         list.add(new LifeEvent("Bir1", Milestone.BIRTH, "Bạn được sinh ra trong một gia đình giàu có, bố mẹ để cho bạn 100K khi vừa chào đời.", new Bank(100000), new Condition() ));
-        list.add(new LifeEvent("Bir2", Milestone.BIRTH, "Bạn được sinh ra trong một gia đình bình thường, được bố mẹ chăm lo chu đáo nên mạnh khỏe, hạnh phúc", new Bank(), new Condition(50, 4, 95,95,80)));
+        list.add(new LifeEvent("Bir2", Milestone.BIRTH, "Bạn được sinh ra trong một gia đình bình thường, được bố mẹ chăm lo chu đáo nên mạnh khỏe, hạnh phúc", new Bank(), new Condition(50, 4, 80,85,60)));
         list.add(new LifeEvent("New1", Milestone.NEWAGE, "Năm nay bố hứa được học sinh giỏi sẽ dẫn đi chơi, bạn nỗ lực và đặt được kết quả tốt", new Bank(), new Condition(0,0,0,10,5) ));
         list.add(new LifeEvent("New2", Milestone.NEWAGE, "Chả hiểu sao đang đi đường có đứa quăng cái dép vêu cả mồm, đi khám mất 100 đồng", new Bank(-100), new Condition(0,0,-10,-5,-5) ));
         list.add(new LifeEvent("New3", Milestone.NEWAGE, "Thầy bói bảo ra đường chú ý nhìn trước nhìn sau, thế là không nhìn 2 bên nên bị ô tô đâm nằm viện. May mà không mất tiền viện phí", new Bank(), new Condition(0,-5,-20,-5,-5) ));
-        list.add(new LifeEvent("New4", Milestone.NEWAGE, "Đầu năm đi chúc tết tự nhiên nhặt được phong bao dầy cộp, bên trong có 10k tiền lẻ T.T Thôi cũng đủ hạnh phúc rồi", new Bank(), new Condition(0,5,5,10, 1) ));
+        list.add(new LifeEvent("New4", Milestone.NEWAGE, "Đầu năm đi chúc tết tự nhiên nhặt được phong bao dầy cộp, bên trong có 10k tiền lẻ T.T Thôi cũng đủ hạnh phúc rồi", new Bank(10000), new Condition(0,5,5,10, 1) ));
         return list;
     }
 

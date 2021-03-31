@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.lifesimulator.Model.AppDataStore;
+import com.example.lifesimulator.Model.Degree;
 import com.example.lifesimulator.R;
 
 
@@ -60,8 +61,8 @@ public class IdentityFragment extends Fragment {
 
     public void UpdateInformation(){
         txtAge.setText("Tuổi: " + AppDataStore.identity.getAge());
-        txtDegree.setText("Học vấn: " + AppDataStore.identity.getAge());
-        txtJob.setText("Công việc: " + AppDataStore.identity.getAge());
+        txtDegree.setText("Học vấn: " + AppDataStore.identity.getStrDegree());
+        txtJob.setText("Công việc: " + (AppDataStore.identity.getJob() == null ?"Không có": AppDataStore.identity.getJob().getName()));
         txtTotal.setText("Tổng tài sản: " + AppDataStore.identity.getBank().getAllMoney());
         txtLoan.setText("Nợ: " + AppDataStore.identity.getBank().getAllLoan());
     }

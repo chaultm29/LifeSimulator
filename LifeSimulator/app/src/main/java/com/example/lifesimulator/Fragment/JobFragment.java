@@ -11,17 +11,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.example.lifesimulator.Adapter.WorkAdapter;
 import com.example.lifesimulator.Model.AppDataStore;
+import com.example.lifesimulator.Model.Identity;
 import com.example.lifesimulator.R;
 
 
 public class JobFragment extends Fragment {
 
-    private RecyclerView rcvJob;
-
-    private WorkAdapter workAdapter;
+    TextView jobText;
+    Fragment selectedFragment = null;
 
 
     @Override
@@ -33,21 +34,44 @@ public class JobFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rcvJob = view.findViewById(R.id.job_list);
-//
-//
-//        workAdapter = new WorkAdapter();
-//        //FrameLayout linearLayoutManager1 = new FrameLayout(view.getContext());
-//       // rcvJob.setLayoutManager(linearLayoutManager1);
-//        rcvJob.setFocusable(false);
-//        rcvJob.setNestedScrollingEnabled(false);
-//
-//       // workAdapter.setData(get());
-//        rcvJob.setAdapter(workAdapter);
+        jobText = view.findViewById(R.id.jobText);
+        switch (AppDataStore.identity.getDegree()){
+            case NONE:
+                jobText.setText("Chưa đủ tuổi đi học");
+                break;
+            case LEVEL1:
+                jobText.setText("Học tiểu học");
+                selectedFragment = new WorkProcessFragment();
+                break;
+            case LEVEL2:
+                jobText.setText("Học cấp 2");
+                selectedFragment = new WorkProcessFragment();
+                break;
+            case LEVEL3:
+                jobText.setText("Học cấp 3");
+                selectedFragment = new WorkProcessFragment();
+                break;
+            case SELECTUNI:
+                jobText.setText("Ngã rẽ cuộc đời");
+                selectedFragment = new WorkSelectFragment(this);
+                break;
+            case UNIVERSITY:
+                jobText.setText("Học đại học");
+                selectedFragment = new WorkProcessFragment();
+                break;
+            case SELECTWORK:
+                jobText.setText("Chọn nơi gửi gắm");
+                selectedFragment = new WorkSelectFragment(this);
+                break;
+            case WORK:
+                jobText.setText("Đi làm");
+                selectedFragment = new WorkProcessFragment();
+                break;
+            default:
 
-
-        if(AppDataStore.identity.getAge()<18){
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.job_fragment, new WorkSelectFragment(this)).commit();
+        }
+        if (selectedFragment != null) {
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.job_fragment, selectedFragment).commit();
         }
     }
 
